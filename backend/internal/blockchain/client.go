@@ -9,6 +9,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 )
@@ -20,10 +21,10 @@ type Client struct {
 	PrivateKey *ecdsa.PrivateKey
 
 	// Contract addresses
-	NFTAddress        common.Address
-	CaseAddress       common.Address
+	NFTAddress         common.Address
+	CaseAddress        common.Address
 	MarketplaceAddress common.Address
-	BurnAddress       common.Address
+	BurnAddress        common.Address
 }
 
 // NewClient creates a new blockchain client
@@ -114,4 +115,3 @@ func (c *Client) WaitForTransaction(ctx context.Context, txHash common.Hash) err
 
 	return nil
 }
-

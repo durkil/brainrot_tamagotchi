@@ -2,7 +2,7 @@
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
-import { useState, useEffect } from 'use';
+import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { petAPI, setWalletAddress } from '@/lib/api';
 import { motion } from 'framer-motion';

@@ -9,6 +9,7 @@ import (
 	"brainrot-tamagotchi/pkg/database"
 	"context"
 	"log"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"

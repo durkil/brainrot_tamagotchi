@@ -7,12 +7,14 @@
 ## 📦 Що вже зроблено
 
 ✅ **Smart Contracts** (Solidity)
+
 - BrainrotNFT.sol - ERC-721 NFT з levels та рідкістю
 - CaseOpening.sol - Система кейсів
 - Marketplace.sol - P2P торгівля
 - BurnUpgrade.sol - Обмін NFT
 
 ✅ **Backend API** (Golang)
+
 - Gin web server
 - PostgreSQL + GORM
 - Redis caching
@@ -22,6 +24,7 @@
 - Background jobs
 
 ✅ **Frontend** (Next.js)
+
 - React 18 + TypeScript
 - RainbowKit wallet integration
 - Wagmi for Base chain
@@ -35,7 +38,7 @@
 ### 1. Clone & Install
 
 ```bash
-cd /Users/durkil/brainrot\ tamagotchi/unified
+cd "/Users/durkil/brainrot tamagotchi"
 
 # Contracts
 cd contracts
@@ -53,6 +56,7 @@ npm install
 ### 2. Setup Environment
 
 **Contracts:**
+
 ```bash
 cd contracts
 cp .env.example .env
@@ -60,6 +64,7 @@ cp .env.example .env
 ```
 
 **Backend:**
+
 ```bash
 cd backend
 cp .env.example .env
@@ -67,6 +72,7 @@ cp .env.example .env
 ```
 
 **Frontend:**
+
 ```bash
 cd frontend
 cp .env.example .env.local
@@ -76,6 +82,7 @@ cp .env.example .env.local
 ### 3. Start Services
 
 **Option A: Docker (найпростіше)**
+
 ```bash
 # В unified/ root
 docker-compose up -d
@@ -84,23 +91,27 @@ docker-compose up -d
 **Option B: Manual**
 
 Terminal 1 - PostgreSQL:
+
 ```bash
 # Встанови PostgreSQL локально або використай Docker:
 docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgres
 ```
 
 Terminal 2 - Redis:
+
 ```bash
 docker run -d -p 6379:6379 redis
 ```
 
 Terminal 3 - Backend:
+
 ```bash
 cd backend
 go run cmd/main.go
 ```
 
 Terminal 4 - Frontend:
+
 ```bash
 cd frontend
 npm run dev
@@ -126,6 +137,7 @@ npx hardhat run scripts/deploy.js --network base-sepolia
 Backend має заглушки для blockchain calls. Потрібно:
 
 - Згенерувати Go bindings з контрактів:
+
 ```bash
 cd contracts
 npx hardhat compile
@@ -135,6 +147,7 @@ abigen --abi=../contracts/artifacts/contracts/BrainrotNFT.sol/BrainrotNFT.json -
 ```
 
 - Імплементувати функції в `blockchain/client.go`:
+
   - MintNFT()
   - BurnNFT()
   - ListOnMarketplace()
@@ -176,7 +189,7 @@ abigen --abi=../contracts/artifacts/contracts/BrainrotNFT.sol/BrainrotNFT.json -
 ## 📁 Project Structure
 
 ```
-unified/
+brainrot tamagotchi/
 ├── contracts/          # Solidity smart contracts
 │   ├── src/
 │   │   ├── BrainrotNFT.sol
@@ -215,6 +228,7 @@ unified/
 ## 🧪 Development Workflow
 
 ### Розробка контрактів:
+
 ```bash
 cd contracts
 npx hardhat compile
@@ -223,6 +237,7 @@ npx hardhat node  # Local blockchain
 ```
 
 ### Розробка backend:
+
 ```bash
 cd backend
 go run cmd/main.go
@@ -230,6 +245,7 @@ go run cmd/main.go
 ```
 
 ### Розробка frontend:
+
 ```bash
 cd frontend
 npm run dev
@@ -242,6 +258,7 @@ npm run dev
 
 - Frontend: Next.js автоматично hot reload
 - Backend: Використай `air` для Go hot reload:
+
 ```bash
 go install github.com/cosmtrek/air@latest
 cd backend
@@ -253,6 +270,7 @@ air
 ## 📚 Useful Commands
 
 ### Contracts:
+
 ```bash
 npx hardhat compile                    # Compile contracts
 npx hardhat test                       # Run tests
@@ -261,6 +279,7 @@ npx hardhat verify --network base-sepolia ADDRESS  # Verify
 ```
 
 ### Backend:
+
 ```bash
 go run cmd/main.go                     # Run
 go test ./...                          # Test
@@ -268,6 +287,7 @@ go build -o brainrot cmd/main.go       # Build
 ```
 
 ### Frontend:
+
 ```bash
 npm run dev                            # Development
 npm run build                          # Build for production
@@ -280,18 +300,22 @@ npm run lint                           # Lint
 ## 🐛 Debugging
 
 ### Backend logs:
+
 Backend виводить детальні logs. Шукай помилки в console.
 
 ### Frontend logs:
+
 Відкрий browser DevTools (F12) → Console
 
 ### Database:
+
 ```bash
 docker exec -it brainrot-postgres psql -U postgres -d brainrot
 # SQL queries here
 ```
 
 ### Redis:
+
 ```bash
 docker exec -it brainrot-redis redis-cli
 # Redis commands here
@@ -321,10 +345,10 @@ docker exec -it brainrot-redis redis-cli
 ## ✨ MVP Ready!
 
 Базова структура готова! Тепер можеш:
+
 1. Deploy контракти
 2. Start backend
 3. Start frontend
 4. Почати розробку фіч
 
 **Let's build the most brainrot tamagotchi ever! 🧠🎮**
-

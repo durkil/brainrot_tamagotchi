@@ -4,7 +4,6 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
 
 /**
  * @title BrainrotNFT
@@ -12,9 +11,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
  * Кожен NFT - це мемний персонаж з рівнем та рідкістю
  */
 contract BrainrotNFT is ERC721, ERC721URIStorage, Ownable {
-    using Counters for Counters.Counter;
-    
-    Counters.Counter private _tokenIdCounter;
+    uint256 private _tokenIdCounter;
     
     // Rarity levels
     enum Rarity {
@@ -91,8 +88,8 @@ contract BrainrotNFT is ERC721, ERC721URIStorage, Ownable {
         );
         require(colorVariant < 5, "Invalid color variant");
         
-        _tokenIdCounter.increment();
-        uint256 tokenId = _tokenIdCounter.current();
+        _tokenIdCounter++;
+        uint256 tokenId = _tokenIdCounter;
         
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, tokenURI);
@@ -182,7 +179,7 @@ contract BrainrotNFT is ERC721, ERC721URIStorage, Ownable {
         uint256[] memory tokens = new uint256[](tokenCount);
         uint256 index = 0;
         
-        for (uint256 i = 1; i <= _tokenIdCounter.current(); i++) {
+        for (uint256 i = 1; i <= _tokenIdCounter; i++) {
             if (_ownerOf(i) == owner) {
                 tokens[index] = i;
                 index++;
@@ -212,7 +209,7 @@ contract BrainrotNFT is ERC721, ERC721URIStorage, Ownable {
      * @dev Get total supply
      */
     function totalSupply() external view returns (uint256) {
-        return _tokenIdCounter.current();
+        return _tokenIdCounter;
     }
     
     // Override functions

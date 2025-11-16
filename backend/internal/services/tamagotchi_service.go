@@ -4,7 +4,6 @@ import (
 	"brainrot-tamagotchi/internal/blockchain"
 	"brainrot-tamagotchi/internal/models"
 	"brainrot-tamagotchi/internal/repository"
-	"context"
 	"fmt"
 	"log"
 	"time"
@@ -210,4 +209,3 @@ func max(a, b int) int {
 	}
 	return b
 }
-

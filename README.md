@@ -18,7 +18,7 @@
 ## 🏗️ Архітектура
 
 ```
-/unified/
+/brainrot tamagotchi/
 ├── /contracts/        # Solidity смарт-контракти (Base chain)
 ├── /backend/          # Golang API (Gin + GORM + go-ethereum)
 ├── /frontend/         # Next.js mini app (React + Base SDK)
@@ -56,7 +56,7 @@
 ### **1. Clone & Install**
 
 ```bash
-cd unified
+cd "/Users/durkil/brainrot tamagotchi"
 
 # Contracts
 cd contracts

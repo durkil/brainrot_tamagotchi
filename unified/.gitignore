@@ -1,0 +1,72 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Environment
+.env
+.env.local
+.env*.local
+*.env
+
+# Build outputs
+dist/
+build/
+out/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Hardhat
+cache/
+artifacts/
+typechain-types/
+
+# Go
+*.test
+*.out
+/backend/tmp/
+/backend/brainrot-backend
+
+# Next.js
+.next/
+.vercel
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Redis
+dump.rdb
+
+# Uploads
+uploads/
+public/uploads/
+
+# Contract ABIs (generated)
+/backend/contracts/*.go
+
+# Test coverage
+coverage/
+*.coverage
+*.coverprofile
+
+# OS
+Thumbs.db
+

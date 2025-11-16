@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: brainrot-postgres
+    environment:
+      POSTGRES_DB: brainrot
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: brainrot-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: brainrot-backend
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/brainrot?sslmode=disable
+      REDIS_URL: redis://redis:6379
+      BASE_RPC_URL: ${BASE_RPC_URL}
+      PRIVATE_KEY: ${PRIVATE_KEY}
+      CONTRACT_NFT_ADDRESS: ${CONTRACT_NFT_ADDRESS}
+      CONTRACT_CASE_ADDRESS: ${CONTRACT_CASE_ADDRESS}
+      CONTRACT_MARKETPLACE_ADDRESS: ${CONTRACT_MARKETPLACE_ADDRESS}
+      CONTRACT_BURN_ADDRESS: ${CONTRACT_BURN_ADDRESS}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: brainrot-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080/api/v1
+      NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: ${WALLETCONNECT_PROJECT_ID}
+      NEXT_PUBLIC_ENABLE_TESTNETS: "true"
+      NEXT_PUBLIC_NFT_CONTRACT: ${CONTRACT_NFT_ADDRESS}
+      NEXT_PUBLIC_CASE_CONTRACT: ${CONTRACT_CASE_ADDRESS}
+      NEXT_PUBLIC_MARKETPLACE_CONTRACT: ${CONTRACT_MARKETPLACE_ADDRESS}
+      NEXT_PUBLIC_BURN_CONTRACT: ${CONTRACT_BURN_ADDRESS}
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+

@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+  }
+  
+  @keyframes gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+}
+
+/* Brainrot aesthetic */
+.brainrot-card {
+  @apply bg-gradient-to-br from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-2xl p-6;
+  backdrop-filter: blur(10px);
+}
+
+.brainrot-button {
+  @apply bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-6 rounded-xl;
+  @apply hover:from-purple-700 hover:to-pink-700 transition-all duration-200;
+  @apply active:scale-95;
+}
+
+.stat-bar {
+  @apply relative h-4 bg-gray-700 rounded-full overflow-hidden;
+}
+
+.stat-bar-fill {
+  @apply h-full bg-gradient-to-r transition-all duration-500;
+}
+

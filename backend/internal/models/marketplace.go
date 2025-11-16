@@ -21,8 +21,8 @@ type MarketListing struct {
 	UpdatedAt     time.Time      `json:"updated_at"`
 	DeletedAt     gorm.DeletedAt `gorm:"index" json:"-"`
 
-	// Relations
-	NFT *NFT `gorm:"foreignKey:TokenID;references:TokenID" json:"nft,omitempty"`
+	// Relations (without constraint to avoid circular dependency during migration)
+	// NFT *NFT `gorm:"foreignKey:TokenID;references:TokenID" json:"nft,omitempty"`
 }
 
 // TableName overrides the table name

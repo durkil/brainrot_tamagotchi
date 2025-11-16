@@ -47,13 +47,16 @@ func main() {
 	}
 	log.Println("✅ Redis connected")
 
-	// Initialize blockchain client
+	// Initialize blockchain client (optional for MVP)
 	log.Println("📦 Connecting to Base blockchain...")
 	blockchainClient, err := blockchain.NewClient()
 	if err != nil {
-		log.Fatal("Failed to connect to blockchain:", err)
+		log.Printf("⚠️  Warning: Failed to connect to blockchain: %v", err)
+		log.Println("⚠️  Blockchain features will be disabled. Set PRIVATE_KEY and BASE_RPC_URL to enable.")
+		blockchainClient = nil
+	} else {
+		log.Println("✅ Blockchain connected")
 	}
-	log.Println("✅ Blockchain connected")
 
 	// Initialize repositories
 	userRepo := repository.NewUserRepository(db)
@@ -132,4 +135,3 @@ func main() {
 
 	log.Println("✅ Server exited")
 }
-

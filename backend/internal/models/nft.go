@@ -31,6 +31,9 @@ type NFT struct {
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
+	
+	// Relations (without constraint to avoid circular dependency)
+	// Listing *MarketListing `gorm:"foreignKey:TokenID;references:TokenID;constraint:OnDelete:CASCADE" json:"listing,omitempty"`
 }
 
 // TableName overrides the table name

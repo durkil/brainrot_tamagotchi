@@ -14,8 +14,8 @@ type User struct {
 	UpdatedAt     time.Time      `json:"updated_at"`
 	DeletedAt     gorm.DeletedAt `gorm:"index" json:"-"`
 
-	// Relations
-	NFTs []NFT `gorm:"foreignKey:OwnerAddress;references:WalletAddress" json:"nfts,omitempty"`
+	// Relations (without constraint to avoid issues)
+	// NFTs []NFT `gorm:"foreignKey:OwnerAddress;references:WalletAddress" json:"nfts,omitempty"`
 }
 
 // TableName overrides the table name
